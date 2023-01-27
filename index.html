@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="index.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Save Later</title>
+  </head>
+  <body>
+    <!-- Form Section -->
+    <div class="alert"></div>
+    <form id="save-later-form">
+      <h3>Form</h3>
+      <label for="full-name">Person's Name</label><br />
+      <div class="name">
+        <input type="text" name="first-name" id="first-name" />
+        <input type="text" name="last-name" id="last-name" />
+      </div>
+      <label for="phone">Phone Number</label><br />
+      <input type="tel" name="phone" id="phone" maxlength="11" />
+      <br />
+      <br />
+      <button type="submit" id="save">SAVE</button>
+    </form>
+    <!-- Table Section -->
+    <p id="table_creater" style="font-size: 15px; font-weight: bold"></p>
+    <button align="center" onclick="constructTable('#table')">
+      click here
+    </button>
+    <table align="center" id="table" border="1"></table>
+
+    <script src="index.js"></script>
+  </body>
+</html>
