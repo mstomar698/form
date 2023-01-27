@@ -13,10 +13,10 @@
     <div class="alert"></div>
     <form id="save-later-form">
       <h3>Form</h3>
-      <label for="full-name">Person's Name</label><br />
+      <label for="full_name">Person's Name</label><br />
       <div class="name">
-        <input type="text" name="first-name" id="first-name" />
-        <input type="text" name="last-name" id="last-name" />
+        <input type="text" name="first_name" id="first_name" />
+        <input type="text" name="last_name" id="last_name" />
       </div>
       <label for="phone">Phone Number</label><br />
       <input type="tel" name="phone" id="phone" maxlength="11" />
@@ -24,13 +24,37 @@
       <br />
       <button type="submit" id="save">SAVE</button>
     </form>
+    <!-- Search Section -->
+    <h4>Search First Name</h4>
+    <div class="search-section">
+      <input type="text" id="myText" value="" />
+      <button type="submit" id="search">Search</button>
+      <br />
+      <br />
+      <br />
+    </div>
+    <div id="searchResult"></div>
     <!-- Table Section -->
-    <p id="table_creater" style="font-size: 15px; font-weight: bold"></p>
-    <button align="center" onclick="constructTable('#table')">
-      click here
-    </button>
-    <table align="center" id="table" border="1"></table>
-
+    <div class="table-section">
+      <table id="table">
+        <thead>
+          <tr>
+            <th>SN.</th>
+            <th onclick="SortLocalStorage()">Name</th>
+            <!-- id="sort" value="name_sort" -->
+            <th>Contact</th>
+            <th>Delete</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>John Doe</td>
+            <td>08012345678</td>
+            <td><button type="submit" id="delete">❌</button></td>
+          </tr>
+        </thead>
+        <tbody id="table_body"></tbody>
+      </table>
+    </div>
     <script src="index.js"></script>
   </body>
 </html>
