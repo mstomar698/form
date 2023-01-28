@@ -32,7 +32,6 @@ saveButton.onclick = (event) => {
   localStorage.setItem('tableIdentifier', JSON.stringify(data));
   const message = 'Form draft has been saved!';
   displayAlert(message);
-  console.log(localStorage);
   populateTable();
 };
 
@@ -52,7 +51,6 @@ searchButton.onclick = (event) => {
     const first_name_expecting = savedData.first_name;
     function print() {
       var keys = Object.keys(savedData);
-      console.log(keys);
       for (var i = 0; i < keys.length; i++) {
         let objectArray = [
           savedData[keys[0]],
@@ -65,7 +63,9 @@ searchButton.onclick = (event) => {
     console.log(searchQuery);
     console.log(first_name_expecting);
     if (searchQuery === first_name_expecting) {
-      document.getElementById('searchResult').innerHTML = print();
+      document.getElementById('searchResult').innerHTML = print() || '';
+      const message = 'Searched User Found!!!';
+      displayAlert(message);
     } else {
       document.getElementById('searchResult').innerHTML = 'No User Found';
       const message = 'Searched User not Found!!!';
@@ -84,6 +84,8 @@ function SortLocalStorage() {
     }
     var sortedArray = localStorageArray.sort();
     console.log(sortedArray);
+    const message = 'Sorted Array in localStorage based on first_name!!!';
+    displayAlert(message);
   }
   return sortedArray;
 }
@@ -99,13 +101,12 @@ const displayAlert = (message) => {
   alertBox.style.display = 'block';
   setTimeout(function () {
     alertBox.style.display = 'none';
-  }, 1000);
+  }, 5000);
 };
 
 const populateForm = () => {
   if (localStorage.key(formIdentifier)) {
     const savedData = JSON.parse(localStorage.getItem(formIdentifier));
-    console.log(savedData);
     for (const element of formElements) {
       if (element.name in savedData) {
         element.value = savedData[element.name];
@@ -114,83 +115,111 @@ const populateForm = () => {
 
     const message = 'Form has been refilled with saved data!';
     displayAlert(message);
-    console.log(localStorage);
   }
 };
 
 const populateTable = () => {
   console.log('table populated');
-  var testObject = [
-    { name: 'James', score: 90, time: '16:00' },
-    {
-      name: 'Robert',
-      score: 80,
-      time: '15:00',
-    },
+  var demoObject = [
+    { first_name: 'James, holand', phone: '1234567890' },
+    { first_name: 'esim, heroku', phone: '1234567890' },
+    { first_name: 'heli, grmal', phone: '1234567890' },
+    { first_name: 'gwan, pill', phone: '1234567890' },
+    { first_name: 'dirt, circ', phone: '1234567890' },
   ];
-  localStorage.setItem('testObject', JSON.stringify(testObject));
-  var retrievedObject = JSON.parse(localStorage.getItem('testObject'));
-  console.log(retrievedObject);
-  var savedData = JSON.parse(localStorage.getItem('tableIdentifier'));
-  console.log(savedData);
-  var tbody = document.getElementById('table_body');
-  for (var i = 0; i < retrievedObject.length; i++) {
-    var tr = '<tr>';
-    tr += '<td>Name</td>' + '<td>' + retrievedObject[i].name + '</td></tr>';
-    tr += '<td>Score</td>' + '<td>' + retrievedObject[i].score + '</td></tr>';
-    tr += '<td>Time</td>' + '<td>' + retrievedObject[i].time + '</td></tr>';
-    tbody.innerHTML += tr;
+  localStorage.setItem('demoFormData', JSON.stringify(demoObject));
+
+  const demoStoredData = JSON.parse(localStorage.getItem('demoFormData'));
+  const savedData = JSON.parse(localStorage.getItem(formIdentifier));
+  function name() {
+    var keys = Object.keys(savedData);
+    for (var i = 0; i < keys.length; i++) {
+      let objectArray = [savedData[keys[0]], savedData[keys[1]]];
+      return objectArray;
+    }
   }
+  var tr = '<tr>';
+  var td = '<td>';
+  var HTML =
+    tr +
+    '<td>2</td>' +
+    td +
+    name() +
+    '</td>' +
+    td +
+    savedData.phone +
+    '</td>' +
+    td +
+    '<button type="submit" id="delete">❌</button>' +
+    '</td></tr>';
+
+  var t = document.getElementById('table_body');
+  t.innerHTML = HTML;
+  var tbody = document.getElementById('table_body');
+  tr +=
+    '<td>3</td>' +
+    td +
+    demoStoredData[0].first_name +
+    '</td>' +
+    td +
+    demoStoredData[0].phone +
+    '</td>' +
+    td +
+    '<button type="submit" id="delete">❌</button>' +
+    '</td>' +
+    '</td></tr>';
+  tr +=
+    '<td>4</td>' +
+    td +
+    demoStoredData[1].first_name +
+    '</td>' +
+    td +
+    demoStoredData[1].phone +
+    '</td>' +
+    td +
+    '<button type="submit" id="delete">❌</button>' +
+    '</td>' +
+    '</td></tr>';
+  tr +=
+    '<td>5</td>' +
+    td +
+    demoStoredData[2].first_name +
+    '</td>' +
+    td +
+    demoStoredData[2].phone +
+    '</td>' +
+    td +
+    '<button type="submit" id="delete">❌</button>' +
+    '</td>' +
+    '</td></tr>';
+  tr +=
+    '<td>6</td>' +
+    td +
+    demoStoredData[3].first_name +
+    '</td>' +
+    td +
+    demoStoredData[3].phone +
+    '</td>' +
+    td +
+    '<button type="submit" id="delete">❌</button>' +
+    '</td>' +
+    '</td></tr>';
+  tr +=
+    '<td>7</td>' +
+    td +
+    demoStoredData[4].first_name +
+    '</td>' +
+    td +
+    demoStoredData[4].phone +
+    '</td>' +
+    td +
+    '<button type="submit" id="delete">❌</button>' +
+    '</td>' +
+    '</td></tr>';
+  tbody.innerHTML += tr;
+  const message = 'Table has been populated with formData and demoData!!';
+  displayAlert(message);
 };
 
 document.onload = populateForm();
-
-// for creating table
-
-var el_up = document.getElementById('table_creater');
-var list = [
-  { col_1: 'val_11', col_3: 'val_13' },
-  { col_2: 'val_22', col_3: 'val_23' },
-  { col_1: 'val_31', col_3: 'val_33' },
-];
-function constructTable(selector) {
-  // Getting the all column names
-  var cols = Headers(list, selector);
-
-  // Traversing the JSON data
-  for (var i = 0; i < list.length; i++) {
-    var row = $('<tr/>');
-    for (var colIndex = 0; colIndex < cols.length; colIndex++) {
-      var val = list[i][cols[colIndex]];
-
-      // If there is any key, which is matching
-      // with the column name
-      if (val == null) val = '';
-      row.append($('<td/>').html(val));
-    }
-
-    // Adding each row to the table
-    $(selector).append(row);
-  }
-}
-function Headers(list, selector) {
-  var columns = [];
-  var header = $('<tr/>');
-
-  for (var i = 0; i < list.length; i++) {
-    var row = list[i];
-
-    for (var k in row) {
-      if ($.inArray(k, columns) == -1) {
-        columns.push(k);
-
-        // Creating the header
-        header.append($('<th/>').html(k));
-      }
-    }
-  }
-
-  // Appending the header to the table
-  $(selector).append(header);
-  return columns;
-}
+document.onload = populateTable();
