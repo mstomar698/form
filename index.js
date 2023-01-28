@@ -41,6 +41,7 @@ deleteButton.onclick = (event) => {
   const message = 'Data from table has been deleted!';
   displayAlert(message);
   console.log(localStorage);
+  location.reload();
 };
 
 searchButton.onclick = (event) => {
@@ -101,7 +102,7 @@ const displayAlert = (message) => {
   alertBox.style.display = 'block';
   setTimeout(function () {
     alertBox.style.display = 'none';
-  }, 5000);
+  }, 2000);
 };
 
 const populateForm = () => {
@@ -220,6 +221,8 @@ const populateTable = () => {
   const message = 'Table has been populated with formData and demoData!!';
   displayAlert(message);
 };
-
+setTimeout(function () {
+  window.location.reload();
+}, 1000);
 document.onload = populateForm();
 document.onload = populateTable();
